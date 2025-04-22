@@ -1,4 +1,4 @@
-package com.ancas.reactive.ws.users.infrastructure;
+package com.ancas.reactive.ws.users.infrastructure.driven_adapters.database.config;
 
 import org.h2.tools.Server;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
