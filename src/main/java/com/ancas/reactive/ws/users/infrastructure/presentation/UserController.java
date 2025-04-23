@@ -1,6 +1,7 @@
 package com.ancas.reactive.ws.users.infrastructure.presentation;
 
 import com.ancas.reactive.ws.users.infrastructure.request.CreateUserRequest;
+import com.ancas.reactive.ws.users.infrastructure.response.UserResponse;
 import com.ancas.reactive.ws.users.infrastructure.utils.ValidationUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,10 @@ public class UserController {
     }
 
     @PostMapping
-    public Mono<ResponseEntity<Void>> createUser(@RequestBody Mono<CreateUserRequest> createUserRequest) {
+    public Mono<UserResponse> createUser(@RequestBody Mono<CreateUserRequest> createUserRequest) {
         return createUserRequest
                 .doOnNext(user->this.validationUtils.validate(user))
                 .doOnNext(user -> System.out.println("Valid: " + user))
-                .map(savedUser -> ResponseEntity.status(HttpStatus.CREATED).build());
+                .map(savedUser ->new UserResponse());
     }
 }
