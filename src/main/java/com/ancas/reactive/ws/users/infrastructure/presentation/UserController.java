@@ -1,5 +1,6 @@
 package com.ancas.reactive.ws.users.infrastructure.presentation;
 
+import com.ancas.reactive.ws.users.domain.mapper.UserMapper;
 import com.ancas.reactive.ws.users.infrastructure.request.CreateUserRequest;
 import com.ancas.reactive.ws.users.infrastructure.response.UserResponse;
 import com.ancas.reactive.ws.users.infrastructure.utils.ValidationUtils;
@@ -26,6 +27,6 @@ public class UserController {
         return createUserRequest
                 .doOnNext(user->this.validationUtils.validate(user))
                 .doOnNext(user -> System.out.println("Valid: " + user))
-                .map(savedUser ->new UserResponse());
+                .map(savedUser -> UserMapper.toResponse(UserMapper.toUser(savedUser)));
     }
 }
