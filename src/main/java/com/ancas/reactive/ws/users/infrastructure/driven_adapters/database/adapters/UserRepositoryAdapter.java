@@ -4,7 +4,9 @@ import com.ancas.reactive.ws.users.domain.models.UserInformation;
 import com.ancas.reactive.ws.users.domain.ports.UserRepositoryPort;
 import com.ancas.reactive.ws.users.infrastructure.driven_adapters.database.repositories.UserRepository;
 import com.ancas.reactive.ws.users.infrastructure.driven_adapters.database.utils.Mapper;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -31,6 +33,12 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public Mono<UserInformation> getUserById(UUID userId) {
         return this.userRepository.findById(userId)
+                .map(Mapper::toResponse);
+    }
+
+    @Override
+    public Flux<UserInformation> getAllUsers(int page, int size) {
+        return this.userRepository.findAllBy(PageRequest.of(page, size))
                 .map(Mapper::toResponse);
     }
 }

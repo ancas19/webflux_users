@@ -6,12 +6,12 @@ import com.ancas.reactive.ws.users.domain.exception.NotFoundException;
 import com.ancas.reactive.ws.users.domain.models.UserInformation;
 import com.ancas.reactive.ws.users.domain.ports.UserRepositoryPort;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
-import static com.ancas.reactive.ws.users.domain.enums.ErrorMessages.ERROR_MESSAGE_EMAIL_ALREADY_EXISTS;
-import static com.ancas.reactive.ws.users.domain.enums.ErrorMessages.ERROR_MESSAGE_USER_NOT_FOUND;
+import static com.ancas.reactive.ws.users.domain.enums.ErrorMessages.*;
 
 @Service
 public class UserAdapter implements IUserPort {
@@ -29,7 +29,7 @@ public class UserAdapter implements IUserPort {
                     UserInformation user = tuple.getT1();
                     Boolean emailExists = tuple.getT2();
                     if (emailExists) {
-                        return Mono.error(new NotFoundException(ERROR_MESSAGE_EMAIL_ALREADY_EXISTS.getMessage().formatted(user.getEmail())));
+                        return Mono.error(new BadRequestException(ERROR_MESSAGE_EMAIL_ALREADY_EXISTS.getMessage().formatted(user.getEmail())));
                     }
                     return userRepositoryPort.save(user);
                 });
@@ -39,6 +39,12 @@ public class UserAdapter implements IUserPort {
     @Override
     public Mono<UserInformation> getUserById(UUID userId) {
         return this.userRepositoryPort.getUserById(userId)
-                .switchIfEmpty(Mono.error(new BadRequestException(ERROR_MESSAGE_USER_NOT_FOUND.getMessage().formatted(userId))));
+                .switchIfEmpty(Mono.error(new NotFoundException(ERROR_MESSAGE_USER_NOT_FOUND.getMessage().formatted(userId))));
+    }
+
+    @Override
+    public Flux<UserInformation> getAllUsers(int page, int size) {
+        return this.userRepositoryPort.getAllUsers(page, size)
+                .switchIfEmpty(Mono.error(new NotFoundException(ERROR_MESSAGE_USERS_NOT_FOUND.getMessage())));
     }
 }
