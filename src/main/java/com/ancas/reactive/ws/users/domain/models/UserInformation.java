@@ -1,17 +1,19 @@
 package com.ancas.reactive.ws.users.domain.models;
 
 
-public class User {
-    private String id;
+import java.util.UUID;
+
+public class UserInformation {
+    private UUID id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
 
-    public User() {
+    public UserInformation() {
     }
 
-    public User(String id, String firstName, String lastName, String email, String password) {
+    public UserInformation(UUID id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,11 +22,11 @@ public class User {
     }
 
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

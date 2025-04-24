@@ -3,6 +3,8 @@ server:
 
 
 spring:
+  webflux:
+    base-path: /api/v1.0/company
   application:
     name: users
   r2dbc:

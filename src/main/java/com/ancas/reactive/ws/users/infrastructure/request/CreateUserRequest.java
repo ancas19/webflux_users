@@ -5,8 +5,10 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.UUID;
+
 public class CreateUserRequest {
-    private String id;
+    private UUID id;
     @NotNull
     @NotEmpty()
     @Size(min = 2, max = 50)
@@ -26,7 +28,7 @@ public class CreateUserRequest {
     public CreateUserRequest() {
     }
 
-    public CreateUserRequest(String id, String firstName, String lastName, String email, String password) {
+    public CreateUserRequest(UUID id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,11 +37,11 @@ public class CreateUserRequest {
     }
 
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

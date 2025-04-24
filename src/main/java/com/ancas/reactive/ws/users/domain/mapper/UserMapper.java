@@ -1,21 +1,21 @@
 package com.ancas.reactive.ws.users.domain.mapper;
 
-import com.ancas.reactive.ws.users.domain.models.User;
+import com.ancas.reactive.ws.users.domain.models.UserInformation;
 import com.ancas.reactive.ws.users.infrastructure.request.CreateUserRequest;
 import com.ancas.reactive.ws.users.infrastructure.response.UserResponse;
 
 public class UserMapper {
-    public static UserResponse toResponse(User user){
+    public static UserResponse toResponse(UserInformation userInformation){
         return new UserResponse(
-                user.getId(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail()
+                userInformation.getId(),
+                userInformation.getFirstName(),
+                userInformation.getLastName(),
+                userInformation.getEmail()
         );
     }
 
-    public static User toUser(CreateUserRequest createUserRequest){
-        return new User(
+    public static UserInformation toUser(CreateUserRequest createUserRequest){
+        return new UserInformation(
                 createUserRequest.getId(),
                 createUserRequest.getFirstName(),
                 createUserRequest.getLastName(),

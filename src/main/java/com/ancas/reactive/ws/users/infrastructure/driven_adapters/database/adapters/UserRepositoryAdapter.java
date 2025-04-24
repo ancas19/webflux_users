@@ -1,0 +1,28 @@
+package com.ancas.reactive.ws.users.infrastructure.driven_adapters.database.adapters;
+
+import com.ancas.reactive.ws.users.domain.models.UserInformation;
+import com.ancas.reactive.ws.users.domain.ports.UserRepositoryPort;
+import com.ancas.reactive.ws.users.infrastructure.driven_adapters.database.repositories.UserRepository;
+import com.ancas.reactive.ws.users.infrastructure.driven_adapters.database.utils.Mapper;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
+
+@Service
+public class UserRepositoryAdapter implements UserRepositoryPort {
+    private final UserRepository userRepository;
+
+    public UserRepositoryAdapter(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public Mono<Boolean> existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Mono<UserInformation> save(UserInformation user) {
+        return this.userRepository.save(Mapper.toEntity(user))
+                .map(Mapper::toResponse);
+    }
+}

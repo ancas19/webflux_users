@@ -1,0 +1,15 @@
+package com.ancas.reactive.ws.users.domain.enums;
+
+public enum ErrorMessages {
+
+    ERROR_MESSAGE_EMAIL_ALREADY_EXISTS("That email(%s) already exists");
+    private final String message;
+
+    ErrorMessages(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}
