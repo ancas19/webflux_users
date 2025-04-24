@@ -44,7 +44,10 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public Mono<ResponseEntity<UserResponse>> getUser(@PathVariable("userId") UUID userId){
-        return Mono.just(ResponseEntity.ok(new UserResponse()));
+        return this.userPort
+                .getUserById(userId)
+                .map(UserMapper::toResponse)
+                .map(ResponseEntity::ok);
     }
 
     @GetMapping()

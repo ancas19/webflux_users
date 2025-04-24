@@ -7,6 +7,8 @@ import com.ancas.reactive.ws.users.infrastructure.driven_adapters.database.utils
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service
 public class UserRepositoryAdapter implements UserRepositoryPort {
     private final UserRepository userRepository;
@@ -23,6 +25,12 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public Mono<UserInformation> save(UserInformation user) {
         return this.userRepository.save(Mapper.toEntity(user))
+                .map(Mapper::toResponse);
+    }
+
+    @Override
+    public Mono<UserInformation> getUserById(UUID userId) {
+        return this.userRepository.findById(userId)
                 .map(Mapper::toResponse);
     }
 }
