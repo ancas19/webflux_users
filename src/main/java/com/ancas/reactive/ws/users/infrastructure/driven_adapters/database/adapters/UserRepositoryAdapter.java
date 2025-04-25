@@ -41,4 +41,10 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         return this.userRepository.findAllBy(PageRequest.of(page, size))
                 .map(Mapper::toResponse);
     }
+
+    @Override
+    public Mono<UserInformation> findByEmail(String username) {
+        return this.userRepository.findByEmail(username)
+                .map(Mapper::toResponse);
+    }
 }

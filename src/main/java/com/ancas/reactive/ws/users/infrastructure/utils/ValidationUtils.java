@@ -1,4 +1,5 @@
 package com.ancas.reactive.ws.users.infrastructure.utils;
+import com.ancas.reactive.ws.users.infrastructure.request.CreateUserRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;

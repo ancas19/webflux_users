@@ -5,6 +5,7 @@ import com.ancas.reactive.ws.users.domain.exception.BadRequestException;
 import com.ancas.reactive.ws.users.domain.exception.NotFoundException;
 import com.ancas.reactive.ws.users.domain.models.UserInformation;
 import com.ancas.reactive.ws.users.domain.ports.UserRepositoryPort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,9 +17,11 @@ import static com.ancas.reactive.ws.users.domain.enums.ErrorMessages.*;
 @Service
 public class UserAdapter implements IUserPort {
     private final UserRepositoryPort userRepositoryPort;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserAdapter(UserRepositoryPort userRepositoryPort) {
+    public UserAdapter(UserRepositoryPort userRepositoryPort, PasswordEncoder passwordEncoder) {
         this.userRepositoryPort = userRepositoryPort;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -31,6 +34,7 @@ public class UserAdapter implements IUserPort {
                     if (emailExists) {
                         return Mono.error(new BadRequestException(ERROR_MESSAGE_EMAIL_ALREADY_EXISTS.getMessage().formatted(user.getEmail())));
                     }
+                    user.setPassword(passwordEncoder.encode(user.getPassword()));
                     return userRepositoryPort.save(user);
                 });
 

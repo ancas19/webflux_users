@@ -2,16 +2,14 @@ package com.ancas.reactive.ws.users.infrastructure.exception;
 
 import com.ancas.reactive.ws.users.domain.exception.BadRequestException;
 import com.ancas.reactive.ws.users.domain.exception.NotFoundException;
+import com.ancas.reactive.ws.users.domain.exception.BadCredentialsException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import reactor.core.publisher.Mono;
 
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.ancas.reactive.ws.users.domain.enums.Constants.*;
 
@@ -21,7 +19,7 @@ public class GlobalExceptionHandler {
     public ProblemDetail customerNotFoundException(ConstraintViolationException exception) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getMessage());
         problemDetail.setTitle(DATA_ERROR.getValue());
-        problemDetail.setType(URI.create(DATA_ERROR.getValue()));
+        problemDetail.setType(URI.create("/data-error"));
         return problemDetail;
     }
 
@@ -38,6 +36,14 @@ public class GlobalExceptionHandler {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getMessage());
         problemDetail.setTitle(BAD_REQUEST.getValue());
         problemDetail.setType(URI.create("/bad-request"));
+        return problemDetail;
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ProblemDetail unauthenticatedException(BadCredentialsException exception) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, exception.getMessage());
+        problemDetail.setTitle(UNAUTHENTICATED.getValue());
+        problemDetail.setType(URI.create("/unauthenticated"));
         return problemDetail;
     }
 

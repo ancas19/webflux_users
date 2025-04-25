@@ -18,10 +18,10 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
 
-    private final ValidationUtils validationUtils;
+    private final ValidationUtils<Object> validationUtils;
     private final IUserPort userPort;
 
-    public UserController(ValidationUtils validationUtils, IUserPort userPort) {
+    public UserController(ValidationUtils<Object> validationUtils, IUserPort userPort) {
         this.validationUtils = validationUtils;
         this.userPort = userPort;
     }

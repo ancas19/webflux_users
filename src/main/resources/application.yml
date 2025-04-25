@@ -20,3 +20,10 @@ logging:
     io:
       r2dbc:
         h2: DEBUG
+jwt:
+  secret: f973594fec7723858f405e4d022ed191b5fcb9d307692501c61088852dc270c8
+
+security:
+  public-paths:
+    - POST:/users
+    - POST:/auth/login
