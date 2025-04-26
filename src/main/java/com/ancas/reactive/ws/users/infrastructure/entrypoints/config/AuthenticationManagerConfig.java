@@ -1,4 +1,4 @@
-package com.ancas.reactive.ws.users.infrastructure.config;
+package com.ancas.reactive.ws.users.infrastructure.entrypoints.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

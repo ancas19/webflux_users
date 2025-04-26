@@ -1,12 +1,14 @@
-package com.ancas.reactive.ws.users.infrastructure.security;
+package com.ancas.reactive.ws.users.infrastructure.entrypoints.security;
 
 import com.ancas.reactive.ws.users.application.ports.IJwtPort;
-import com.ancas.reactive.ws.users.infrastructure.filter.JwtAuthenticationFilter;
-import com.ancas.reactive.ws.users.infrastructure.filter.SecurityProperties;
+import com.ancas.reactive.ws.users.infrastructure.entrypoints.filter.JwtAuthenticationFilter;
+import com.ancas.reactive.ws.users.infrastructure.entrypoints.filter.SecurityProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -17,7 +19,11 @@ import org.springframework.security.web.server.context.NoOpServerSecurityContext
 
 @Configuration
 @EnableWebFluxSecurity
+@EnableReactiveMethodSecurity
 public class WebSecurity {
+
+    @Value("${spring.webflux.base-path:/api}")
+    private String basePath;
 
     private final SecurityProperties securityProperties;
 
@@ -29,8 +35,9 @@ public class WebSecurity {
     public SecurityWebFilterChain httpSecurityFilterChain(ServerHttpSecurity http, ReactiveAuthenticationManager authenticationManager, IJwtPort jwtService) {
         return http.authorizeExchange(
                         exchanges -> exchanges
-                                .pathMatchers(HttpMethod.POST, "/users").permitAll()
-                                .pathMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                                .pathMatchers(HttpMethod.POST, basePath+"/users").permitAll()
+                                .pathMatchers(HttpMethod.POST, basePath+"/auth/login").permitAll()
+                                .pathMatchers(HttpMethod.GET, basePath+"/users/stream").permitAll()
                                 .anyExchange()
                                 .authenticated()
                 )

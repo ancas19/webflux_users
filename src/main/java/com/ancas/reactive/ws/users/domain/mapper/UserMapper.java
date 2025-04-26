@@ -1,8 +1,8 @@
 package com.ancas.reactive.ws.users.domain.mapper;
 
 import com.ancas.reactive.ws.users.domain.models.UserInformation;
-import com.ancas.reactive.ws.users.infrastructure.request.CreateUserRequest;
-import com.ancas.reactive.ws.users.infrastructure.response.UserResponse;
+import com.ancas.reactive.ws.users.infrastructure.entrypoints.request.CreateUserRequest;
+import com.ancas.reactive.ws.users.infrastructure.entrypoints.response.UserResponse;
 
 public class UserMapper {
     public static UserResponse toResponse(UserInformation userInformation){

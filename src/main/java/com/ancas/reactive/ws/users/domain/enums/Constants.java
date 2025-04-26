@@ -6,7 +6,8 @@ public enum Constants {
     BAD_REQUEST("BAD REQUEST"),
     DATA_ERROR("DATA ERROR"),
     INTERNAL_SERVER_ERROR("INTERNAL SERVER ERROR"),
-    UNAUTHENTICATED("UNAUTHENTICATED"),;
+    UNAUTHENTICATED("UNAUTHENTICATED"),
+    ACCESS_DENIED("ACCESS DENIED"),;
     private String value;
     private Constants(String value) {
         this.value = value;

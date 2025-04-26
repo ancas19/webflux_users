@@ -1,4 +1,4 @@
-package com.ancas.reactive.ws.users.infrastructure.exception;
+package com.ancas.reactive.ws.users.infrastructure.entrypoints.exception;
 
 import com.ancas.reactive.ws.users.domain.exception.BadRequestException;
 import com.ancas.reactive.ws.users.domain.exception.NotFoundException;
@@ -6,6 +6,7 @@ import com.ancas.reactive.ws.users.domain.exception.BadCredentialsException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -47,6 +48,13 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    public ProblemDetail accessDeniedException(AccessDeniedException exception) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.getMessage());
+        problemDetail.setTitle(ACCESS_DENIED.getValue());
+        problemDetail.setType(URI.create("/access-denied"));
+        return problemDetail;
+    }
     @ExceptionHandler(Exception.class)
     public ProblemDetail internalServerErrorException(Exception exception) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());

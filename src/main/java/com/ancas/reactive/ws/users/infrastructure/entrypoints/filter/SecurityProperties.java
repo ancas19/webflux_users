@@ -1,4 +1,4 @@
-package com.ancas.reactive.ws.users.infrastructure.filter;
+package com.ancas.reactive.ws.users.infrastructure.entrypoints.filter;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

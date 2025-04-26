@@ -25,5 +25,6 @@ jwt:
 
 security:
   public-paths:
-    - POST:/users
-    - POST:/auth/login
+    - POST:/api/v1.0/company/users
+    - POST:/api/v1.0/company/auth/login
+    - GET:/api/v1.0/company/users/stream

@@ -1,10 +1,10 @@
-package com.ancas.reactive.ws.users.infrastructure.presentation;
+package com.ancas.reactive.ws.users.infrastructure.entrypoints.presentation;
 
 import com.ancas.reactive.ws.users.application.ports.IAuthenticationPort;
 import com.ancas.reactive.ws.users.domain.mapper.AuthenticationMapper;
-import com.ancas.reactive.ws.users.infrastructure.request.AuthenticationRequest;
-import com.ancas.reactive.ws.users.infrastructure.response.AuthenticationResponse;
-import com.ancas.reactive.ws.users.infrastructure.utils.ValidationUtils;
+import com.ancas.reactive.ws.users.infrastructure.entrypoints.request.AuthenticationRequest;
+import com.ancas.reactive.ws.users.infrastructure.entrypoints.response.AuthenticationResponse;
+import com.ancas.reactive.ws.users.infrastructure.entrypoints.utils.ValidationUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

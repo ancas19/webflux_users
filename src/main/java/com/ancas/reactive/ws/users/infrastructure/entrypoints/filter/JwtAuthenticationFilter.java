@@ -1,4 +1,4 @@
-package com.ancas.reactive.ws.users.infrastructure.filter;
+package com.ancas.reactive.ws.users.infrastructure.entrypoints.filter;
 
 import com.ancas.reactive.ws.users.application.ports.IJwtPort;
 import org.springframework.http.HttpHeaders;
@@ -71,7 +71,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                     String[] parts = entry.split(":", 2);
                     return parts.length == 2 &&
                             method.equalsIgnoreCase(parts[0]) &&
-                            path.contains(parts[1]);
+                            path.equalsIgnoreCase(parts[1]);
                 });
     }
 }

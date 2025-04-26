@@ -2,7 +2,6 @@ package com.ancas.reactive.ws.users.infrastructure.driven_adapters.database.util
 
 import com.ancas.reactive.ws.users.domain.models.UserInformation;
 import com.ancas.reactive.ws.users.infrastructure.driven_adapters.database.entities.UserEntity;
-import com.ancas.reactive.ws.users.infrastructure.response.UserResponse;
 
 public class Mapper {
     public static UserEntity toEntity(com.ancas.reactive.ws.users.domain.models.UserInformation userInformation) {

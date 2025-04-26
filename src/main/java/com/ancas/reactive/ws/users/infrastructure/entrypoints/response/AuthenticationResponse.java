@@ -1,4 +1,4 @@
-package com.ancas.reactive.ws.users.infrastructure.response;
+package com.ancas.reactive.ws.users.infrastructure.entrypoints.response;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.ancas.reactive.ws.users.infrastructure.request;
+package com.ancas.reactive.ws.users.infrastructure.entrypoints.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
