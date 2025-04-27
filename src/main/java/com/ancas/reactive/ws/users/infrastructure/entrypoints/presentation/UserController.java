@@ -64,10 +64,8 @@ public class UserController {
     }
 
     @GetMapping(value = "/stream",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> getUsersStream(){
-        return Flux.interval(Duration.ofSeconds(1))
-                .map("Event %s"::formatted);
-        /*return this.userPort.streamUser()
-                .map(UserMapper::toResponse);*/
+    public Flux<UserResponse> getUsersStream(){
+        return this.userPort.streamUser()
+                .map(UserMapper::toResponse);
     }
 }
