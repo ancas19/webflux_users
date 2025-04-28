@@ -1,6 +1,9 @@
 package com.ancas.reactive.ws.users.domain.models;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.List;
 import java.util.UUID;
 
 public class UserInformation {
@@ -9,6 +12,7 @@ public class UserInformation {
     private String lastName;
     private String email;
     private String password;
+    private List<Albums> albums;
 
     public UserInformation() {
     }
@@ -60,5 +64,11 @@ public class UserInformation {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public List<Albums> getAlbums() {
+        return albums;
+    }
+    public void setAlbums(List<Albums> albums) {
+        this.albums = albums;
     }
 }

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface IUserPort {
     Mono<UserInformation> createUser(Mono<UserInformation> userInformation);
-    Mono<UserInformation> getUserById(UUID userId);
+    Mono<UserInformation> getUserById(UUID userId,String include,String authorization);
     Flux<UserInformation> getAllUsers(int page, int size);
     Flux<UserInformation> streamUser();
 }

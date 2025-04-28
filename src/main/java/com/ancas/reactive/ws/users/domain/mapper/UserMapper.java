@@ -10,7 +10,8 @@ public class UserMapper {
                 userInformation.getId(),
                 userInformation.getFirstName(),
                 userInformation.getLastName(),
-                userInformation.getEmail()
+                userInformation.getEmail(),
+                userInformation.getAlbums()
         );
     }
 

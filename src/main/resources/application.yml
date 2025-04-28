@@ -28,3 +28,5 @@ security:
     - POST:/api/v1.0/company/users
     - POST:/api/v1.0/company/auth/login
     - GET:/api/v1.0/company/users/stream
+
+base-uri: http://localhost:8084

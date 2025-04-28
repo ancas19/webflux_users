@@ -47,4 +47,9 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         return this.userRepository.findByEmail(username)
                 .map(Mapper::toResponse);
     }
+
+    @Override
+    public Mono<Boolean> existsById(String userId) {
+        return this.userRepository.existsById(UUID.fromString(userId));
+    }
 }

@@ -47,9 +47,13 @@ public class UserController {
 
     @GetMapping("/{userId}")
     @PreAuthorize("authentication.principal.equals(#userId.toString()) or hasRole('ROLE_ADMIN')")
-    public Mono<ResponseEntity<UserResponse>> getUser(@PathVariable("userId") UUID userId){
+    public Mono<ResponseEntity<UserResponse>> getUser(
+            @PathVariable("userId") UUID userId,
+            @RequestParam(name="include", required = false) String include,
+            @RequestHeader(name = "Authorization", required = false) String authorization
+    ){
         return this.userPort
-                .getUserById(userId)
+                .getUserById(userId,include,authorization)
                 .map(UserMapper::toResponse)
                 .map(ResponseEntity::ok);
     }

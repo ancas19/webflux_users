@@ -12,4 +12,5 @@ public interface UserRepositoryPort {
     Mono<UserInformation> getUserById(UUID userId);
     Flux<UserInformation> getAllUsers(int page, int size);
     Mono<UserInformation> findByEmail(String username);
+    Mono<Boolean> existsById(String userId);
 }
